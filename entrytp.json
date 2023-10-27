@@ -21,7 +21,7 @@
             "type": "communicate",
             "tryInline": true,
             "hasHoldFunctionality": true,
-            "format": "Set value for {$tpsliderId$} set to {$tpsliderValue$}",
+            "format": "Set value for Generic Slider ID {$tpsliderId$} to {$tpsliderValue$}",
             "data": [
               {
                 "id": "tpsliderId",
@@ -42,22 +42,8 @@
         ],
         "connectors": [
           {
-            "id": "tpslider_connector",
-            "name": "Generic Slider Connector",
-            "format": "Generic Slider ID {$tpsliderId$}",
-            "data": [
-                {
-                  "id": "tpsliderId",
-                  "type": "text",
-                  "default": "",
-                  "label": "ID",
-                  "valueChoices": []
-                }
-            ]
-          },
-          {
             "id": "tpslider_range_connector",
-            "name": "Generic Slider Range Connector",
+            "name": "Generic Slider Connector",
             "format": "Generic Slider ID {$tpsliderId$} with values from {$tpsliderMin$} to {$tpsliderMax$}",
             "data": [
                 {

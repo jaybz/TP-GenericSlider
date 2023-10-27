@@ -13,8 +13,7 @@ TPClient.on("ConnectorShortIdNotification", (data) => {
     let idBits = data.connectorId.split("|");
 
     if (!(
-        idBits[0].endsWith("tpslider_range_connector") && idBits.length === 4 ||
-        idBits[0].endsWith("tpslider_connector") && idBits.length === 2
+        idBits[0].endsWith("tpslider_range_connector") && idBits.length === 4
     )) {
         console.log("Invalid Generic Slider ID (contains the | character, or too long)");
         return;
@@ -50,7 +49,6 @@ TPClient.on("ConnectorShortIdNotification", (data) => {
 TPClient.on("ConnectorChange", (data) => {
     console.log("TP-Slider Connector Change");
     switch(data.connectorId) {
-        case "tpslider_connector":
         case "tpslider_range_connector":
             let params = {};
             data.data.forEach((item) => { params[item.id] = item.value; });
