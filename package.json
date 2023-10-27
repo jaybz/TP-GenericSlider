@@ -1,0 +1,29 @@
+{
+  "name": "tpgenericslider",
+  "version": "0.0.1",
+  "description": "Generic Slider Plugin for Touch Portal",
+  "bin": {
+    "app": "src/app.js"
+  },
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "pkg": "pkg --targets node18-win-x64 --output build/win/tpslider . && pkg --targets node18-mac-x64 --output build/mac/tpslider . && copy entrytp.json build\\win\\entry.tp && copy entrytp.json build\\mac\\entry.tp"
+  },
+  "author": "jaybz",
+  "license": "MIT",
+  "pkg": {
+    "scripts": [
+      "src/**/*.js"
+    ],
+    "targets": [
+      "node19"
+    ]
+  },
+  "dependencies": {
+    "touchportal-api": "^3.2.1"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.0"
+  }
+}

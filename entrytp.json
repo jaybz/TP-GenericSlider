@@ -1,0 +1,91 @@
+{
+    "sdk":5,
+    "version":1,
+    "name":"TP-Slider",
+    "id":"TPSlider",
+    "configuration": {
+      "colorDark": "#354879",
+      "colorLight": "#00452C"
+    },
+    "plugin_start_cmd_windows": "\"%TP_PLUGIN_FOLDER%TP-Slider\\tpslider.exe\"",
+    "plugin_start_cmd_mac": "\"%TP_PLUGIN_FOLDER%TP-Slider\\tpslider\"",
+    "categories": [
+      {
+        "id": "tpslider_category",
+        "name": "Generic Slider",
+        "actions": [
+          {
+            "id": "tpslider_set_value",
+            "prefix": "Generic Slider",
+            "name": "Set Slider Value",
+            "type": "communicate",
+            "tryInline": true,
+            "hasHoldFunctionality": true,
+            "format": "Set value for {$tpsliderId$} set to {$tpsliderValue$}",
+            "data": [
+              {
+                "id": "tpsliderId",
+                "type": "text",
+                "label": "Slider ID",
+                "default": "",
+                "valueChoices": []
+              },
+              {
+                "id": "tpsliderValue",
+                "type": "text",
+                "label": "Value",
+                "default": "",
+                "valueChoices": []
+              }
+            ]
+          }
+        ],
+        "connectors": [
+          {
+            "id": "tpslider_connector",
+            "name": "Generic Slider Connector",
+            "format": "Generic Slider ID {$tpsliderId$}",
+            "data": [
+                {
+                  "id": "tpsliderId",
+                  "type": "text",
+                  "default": "",
+                  "label": "ID",
+                  "valueChoices": []
+                }
+            ]
+          },
+          {
+            "id": "tpslider_range_connector",
+            "name": "Generic Slider Range Connector",
+            "format": "Generic Slider ID {$tpsliderId$} with values from {$tpsliderMin$} to {$tpsliderMax$}",
+            "data": [
+                {
+                  "id": "tpsliderId",
+                  "type": "text",
+                  "default": "",
+                  "label": "ID",
+                  "valueChoices": []
+                },
+                {
+                    "id": "tpsliderMin",
+                    "type": "number",
+                    "default": 1,
+                    "label": "Min",
+                    "valueChoices": []
+                  },
+                  {
+                    "id": "tpsliderMax",
+                    "type": "number",
+                    "default": 100,
+                    "label": "Max",
+                    "valueChoices": []
+                  }
+                ]
+          }
+        ],
+        "states": [],
+        "events": []
+      }
+    ]
+  }
