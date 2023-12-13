@@ -4,6 +4,7 @@ const TPClient = new Client();
 const pluginId = 'TPGenericSlider';
 const sliders = {};
 const createdStates = [];
+const sliderValues = {};
 
 TPClient.on("Info", (data) => {
     console.log("TP-GenericSlider Started");
@@ -40,6 +41,7 @@ TPClient.on("ConnectorShortIdNotification", (data) => {
             if (!createdStates.includes(sliderId)) {
                 createdStates.push(sliderId);
                 TPClient.createState("tpgenericslider_" + sliderId, sliderId, Number(minBits[1]), undefined);
+                sliderValues[sliderId] = Number(minBits[1]);
             }
 
             break;
@@ -55,7 +57,8 @@ TPClient.on("ConnectorChange", (data) => {
 
             if(sliders.hasOwnProperty(params.tpsliderId)) {
                 let stateValue =  sliders[params.tpsliderId].valueFromSlider(data.value);
-                TPClient.stateUpdate("tpgenericslider_%s" + params.tpsliderId, stateValue);
+                TPClient.stateUpdate("tpgenericslider_" + params.tpsliderId, stateValue);
+                sliderValues[params.tpsliderId] = stateValue;
             }
             break;
     }
@@ -70,8 +73,11 @@ TPClient.on("Action", (data) => {
             data.data.forEach((item) => { params[item.id] = item.value; });
             if(sliders.hasOwnProperty(params.tpsliderId)) {
                 let sliderValue =  sliders[params.tpsliderId].valueToSlider(params.tpsliderValue);
-                TPClient.stateUpdate("tpgenericslider_%s" + params.tpsliderId, params.tpsliderValue);
-                TPClient.connectorUpdate(sliders[params.tpsliderId].shortId, sliderValue, undefined, true);
+                if(sliderValues[params.tpsliderId] != params.tpsliderValue) {
+                    sliderValues[params.tpsliderId] = params.tpsliderValue;
+                    TPClient.stateUpdate("tpgenericslider_" + params.tpsliderId, params.tpsliderValue);
+                    TPClient.connectorUpdate(sliders[params.tpsliderId].shortId, sliderValue, undefined, true);
+                }
             }
             break;
     }
@@ -79,7 +85,7 @@ TPClient.on("Action", (data) => {
 
 TPClient.on("Close", (data) => {
     console.log("TP-GenericSlider Closing");
-    createdStates.forEach((item) => { TPClient.removeState("tpgenericslider_%s" + item); });
+    createdStates.forEach((item) => { TPClient.removeState("tpgenericslider_" + item); });
     process.exit(0);
 });
 
